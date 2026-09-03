@@ -1,0 +1,111 @@
+[2026-08-31T22:13:12] CMD: 'open notepad' → RESULT: launched
+[2026-08-31T22:20:36] CMD: 'open notepad' → RESULT: launched
+[2026-08-31T22:56:12] CMD: 'open notepad' → RESULT: launched notepad
+[2026-08-31T23:00:45] CMD: 'open notepad' -> RESULT: launched notepad
+[2026-08-31T23:02:35] CMD: 'open notepad' -> RESULT: launched notepad
+[2026-08-31T23:02:35] CMD: 'launch calculator' -> RESULT: error: Calculator.exe not found
+[2026-08-31T23:02:35] CMD: 'start vs code' -> RESULT: error: Code.exe not found
+[2026-08-31T23:02:35] CMD: 'run file explorer' -> RESULT: launched file explorer
+[2026-08-31T23:02:35] CMD: 'open terminal' -> RESULT: launched terminal
+[2026-08-31T23:02:36] CMD: 'open powershell' -> RESULT: launched terminal
+[2026-08-31T23:05:51] CMD: 'open calculator' -> RESULT: error: Calculator.exe not found
+[2026-08-31T23:13:32] CMD: 'open calculator' -> RESULT: error: Calculator.exe not found
+[2026-08-31T23:13:46] CMD: 'open file explorer' -> RESULT: launched file explorer
+[2026-08-31T23:14:29] CMD: 'open calculator' -> RESULT: error: Calculator.exe not found
+[2026-08-31T23:14:41] CMD: 'open terminal' -> RESULT: launched terminal
+[2026-08-31T23:15:28] CMD: 'open calculator' -> RESULT: error: Calculator.exe not found
+[2026-08-31T23:15:36] CMD: 'open vscode' -> RESULT: error: Code.exe not found
+[2026-09-01T20:33:52] CMD: 'open notepad' | TOOL: open_notepad | PERMISSION: GRANTED -> RESULT: launched notepad
+[2026-09-01T20:33:52] CMD: 'launch calculator' | TOOL: open_calculator | PERMISSION: GRANTED -> RESULT: launched calculator
+[2026-09-01T20:33:53] CMD: 'start vs code' | TOOL: open_vscode | PERMISSION: GRANTED -> RESULT: launched vs code
+[2026-09-01T20:33:54] CMD: 'run file explorer' | TOOL: open_file_explorer | PERMISSION: GRANTED -> RESULT: launched file explorer
+[2026-09-01T20:33:54] CMD: 'open terminal' | TOOL: open_terminal | PERMISSION: GRANTED -> RESULT: launched terminal
+[2026-09-01T20:33:54] CMD: 'open powershell' | TOOL: open_terminal | PERMISSION: GRANTED -> RESULT: launched terminal
+[2026-09-01T20:33:55] CMD: 'unknown command' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:33:55] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:33:55] CMD: 'open chrome' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:33:55] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:34:05] CMD: 'open notepad' | TOOL: open_notepad | PERMISSION: GRANTED -> RESULT: launched notepad
+[2026-09-01T20:34:05] CMD: 'launch calculator' | TOOL: open_calculator | PERMISSION: GRANTED -> RESULT: launched calculator
+[2026-09-01T20:34:05] CMD: 'start vs code' | TOOL: open_vscode | PERMISSION: GRANTED -> RESULT: launched vs code
+[2026-09-01T20:34:06] CMD: 'run file explorer' | TOOL: open_file_explorer | PERMISSION: GRANTED -> RESULT: launched file explorer
+[2026-09-01T20:34:06] CMD: 'open terminal' | TOOL: open_terminal | PERMISSION: GRANTED -> RESULT: launched terminal
+[2026-09-01T20:34:07] CMD: 'open powershell' | TOOL: open_terminal | PERMISSION: GRANTED -> RESULT: launched terminal
+[2026-09-01T20:34:07] CMD: 'unknown command' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:34:07] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:34:07] CMD: 'open chrome' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:34:07] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:35:09] CMD: 'open calculat(Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& c:\\SPIDY\\.venv\\Scripts\\Activate.ps1)' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T20:35:26] CMD: 'open calculator' | TOOL: open_calculator | PERMISSION: GRANTED -> RESULT: launched calculator
+[2026-09-01T20:36:26] CMD: 'open ms word' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:01:09] CMD: 'info' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:01:39] CMD: 'open calculator' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Calculator is now open.
+[2026-09-01T21:01:52] CMD: 'winddow management' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:02:17] CMD: 'get_system_info' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:03:37] CMD: 'system info' | TOOL: get_system_info | PERMISSION: GRANTED -> RESULT: System Information:
+  OS:           Windows 11 (10.0.26200)
+  Hostname:     LAPTOP-R1IE4T5U
+  CPU:          Intel64 Family 6 Model 183 Stepping 1, GenuineIntel (28 cores)
+  RAM:          15.7 GB total, 3.8 GB available (75% used)
+  Disk:         C: 475.9 GB total, 56.3 GB free (88% used)
+  Uptime:       2d 7h 32m
+  Architecture: AMD64
+  Python:       3.13.11
+[2026-09-01T21:04:14] CMD: 'open window' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:04:45] CMD: 'open folder C:\\SPIDY' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: Opened folder: c:\spidy
+[2026-09-01T21:04:58] CMD: 'open folder: spidy' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:05:22] CMD: 'open notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-01T21:05:33] CMD: 'maximize notepad' | TOOL: window_management | PERMISSION: GRANTED -> RESULT: Maximized window: "Untitled - Notepad"
+[2026-09-01T21:05:42] CMD: 'minimize notepad' | TOOL: window_management | PERMISSION: GRANTED -> RESULT: Minimized window: "Untitled - Notepad"
+[2026-09-01T21:07:24] CMD: 'computer specs' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:19:05] CMD: 'open notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-01T21:19:09] CMD: 'launch notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-01T21:19:17] CMD: 'start notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-01T21:19:33] CMD: 'open calculator' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Calculator is now open.
+[2026-09-01T21:19:46] CMD: 'open Documents' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: Opened folder: C:\Users\pavan\Documents
+[2026-09-01T21:20:00] CMD: 'system info' | TOOL: get_system_info | PERMISSION: GRANTED -> RESULT: System Information:
+  OS:           Windows 11 (10.0.26200)
+  Hostname:     LAPTOP-R1IE4T5U
+  CPU:          Intel64 Family 6 Model 183 Stepping 1, GenuineIntel (28 cores)
+  RAM:          15.7 GB total, 3.1 GB available (80% used)
+  Disk:         C: 475.9 GB total, 120.8 GB free (75% used)
+  Uptime:       2d 7h 49m
+  Architecture: AMD64
+  Python:       3.13.15
+[2026-09-01T21:20:03] CMD: 'open notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-01T21:20:03] CMD: 'active window' | TOOL: get_active_window | PERMISSION: GRANTED -> RESULT: Active window: "Home - NetMirror - Google Chrome" (chrome.exe)
+[2026-09-01T21:20:06] CMD: 'open folder C:\\Windows' | TOOL: open_folder | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-09-01T21:20:22] CMD: 'open folder C:\\SPIDY\\..\\Windows' | TOOL: open_folder | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-09-01T21:20:28] CMD: 'list files in C:\\SPIDY' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: Contents of C:\SPIDY:
+
+  Folders (6):
+    [DIR]  .claude
+    [DIR]  .git
+    [DIR]  .venv
+    [DIR]  data
+    [DIR]  src
+    [DIR]  tests
+
+  Files (10):
+    [FILE] .gitignore (141 B)
+    [FILE] CHANGELOG.md (2.5 KB)
+    [FILE] CLAUDE.md (2.2 KB)
+    [FILE] DEVELOPMENT_PLAN.md (6.9 KB)
+    [FILE] PRODUCT_VISION.md (9.9 KB)
+    [FILE] README.md (1.4 KB)
+    [FILE] _check_apps.py (2.0 KB)
+    [FILE] _verify_phase2.py (10.6 KB)
+    [FILE] test_functions.py (4.2 KB)
+    [FILE] test_interaction.py (1.8 KB)
+[2026-09-01T21:20:50] CMD: 'open notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-01T21:20:50] CMD: 'minimize notepad' | TOOL: window_management | PERMISSION: GRANTED -> RESULT: Minimized window: "Untitled - Notepad"
+[2026-09-01T21:21:14] CMD: "open something that doesn't exist" | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:21:40] CMD: 'open vs code' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: VS Code is now open.
+[2026-09-01T21:21:48] CMD: 'open folder C:\\SPIDY' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: Opened folder: C:\SPIDY
+[2026-09-01T21:22:09] CMD: 'OPEN NOTEPAD' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-01T21:22:16] CMD: 'xyz abc' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:22:20] CMD: 'open chrome' | TOOL: open_application | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-09-01T21:33:37] CMD: 'python -u "c:\\SPIDY\\src\\main.py"' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:33:56] CMD: 'open chrome' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:34:09] CMD: 'open ms word' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-01T21:34:22] CMD: 'open folder spidy' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: error: Directory not found: spidy
