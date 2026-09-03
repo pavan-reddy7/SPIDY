@@ -264,7 +264,7 @@ def test_tool_discovery():
     print("Testing tool discovery with Phase 4 tools...")
     reg = _create_registry()
     count = len(reg.get_all_tools())
-    assert count == 13, f"Expected 13 tools, got {count}"
+    assert count == 15, f"Expected 15 tools, got {count}"
     for name in ["remember", "recall", "forget"]:
         assert reg.get(name) is not None, f"Tool '{name}' not found"
     print("PASS: 13 tools discovered including Phase 4 tools")

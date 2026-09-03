@@ -243,6 +243,9 @@ Wake word can be added later.
 
 Voice should NOT change the underlying tool/security architecture.
 
+Status:
+COMPLETE
+
 
 ---
 

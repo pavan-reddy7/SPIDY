@@ -10,5 +10,23 @@
     "text": "favorite color is blue",
     "category": "general",
     "created_at": "2026-09-03T21:24:07"
+  },
+  {
+    "id": "43c2a9d2",
+    "text": "i work at microsoft as a software engineer",
+    "category": "general",
+    "created_at": "2026-09-03T21:24:12"
+  },
+  {
+    "id": "41e3bfcd",
+    "text": "spidy source code is in c:\\spidy",
+    "category": "project",
+    "created_at": "2026-09-03T21:26:59"
+  },
+  {
+    "id": "7109d261",
+    "text": "i prefer vs code for programming",
+    "category": "preference",
+    "created_at": "2026-09-03T21:27:45"
   }
 ]
