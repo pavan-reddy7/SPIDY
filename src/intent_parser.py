@@ -93,6 +93,13 @@ def _try_match(cleaned: str, keyword: str, tool: Tool) -> tuple[Tool, dict, int]
         params["_keyword"] = keyword
         return (tool, params, len(keyword))
 
+    # Keyword + colon + trailing parameter: "remember this: my name is Pavan"
+    if cleaned.startswith(keyword + ":"):
+        remainder = cleaned[len(keyword) + 1:].strip()
+        params = _extract_params(remainder)
+        params["_keyword"] = keyword
+        return (tool, params, len(keyword))
+
     return None
 
 

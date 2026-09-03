@@ -2,6 +2,18 @@
 
 All notable changes to the SPIDY project will be documented in this file.
 
+## [Phase 4 - Memory & Context] - 2026-09-03
+
+### Added
+- **Persistent memory store**: `src/memory_store.py` — JSON-backed local storage (`data/memory.json`) with save, search, list, delete, and clear operations. Auto-categorises memories as `general`, `project`, `preference`, or `entity`. Capped at 500 memories.
+- **3 new tool plugins**:
+  - `remember` — Store explicit user memories (e.g. `remember that SPIDY is in C:\SPIDY`)
+  - `recall` — Search, list, or filter memories by category (e.g. `my memories`, `recall SPIDY`)
+  - `forget` — Delete by ID, by text search, or clear all (e.g. `forget everything`)
+- **Short-term session memory**: Last 10 interactions tracked in-memory. Type `history` to view.
+- **Intent parser enhancement**: Colon-separator support (e.g. `remember this: my name is Pavan`)
+- **Test suite**: `tests/test_phase4_memory.py` — 18 tests covering memory store, tools, intents, permissions, and session history.
+
 ## [Phase 3 - Read-Only Filesystem] - 2026-09-02
 
 ### Added

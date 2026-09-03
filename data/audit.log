@@ -759,3 +759,30 @@ Safety and user control are core requirements of the project.
 [2026-09-03T10:02:11] CMD: 'search for README.md in C:\\SPIDY' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: Found 1 file(s) matching 'readme.md':
   C:\SPIDY\README.md  (1.4 KB)
 [2026-09-03T10:03:07] CMD: 'metadata for C:\\\\SPIDY\\\\README.md' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T21:24:00] CMD: "remember that SPIDY's source code is in C:\\SPIDY" | TOOL: remember | PERMISSION: GRANTED -> RESULT: Saved memory (#fcd6ed6a, project):
+  "spidy's source code is in c:\spidy"
+[2026-09-03T21:24:00] CMD: 'list memories' | TOOL: recall | PERMISSION: GRANTED -> RESULT: All memories (1):
+  [fcd6ed6a] (project) spidy's source code is in c:\spidy
+          saved: 2026-09-03T21:24:00
+[2026-09-03T21:24:07] CMD: 'remember that I like pizza' | TOOL: remember | PERMISSION: GRANTED -> RESULT: Saved memory (#f421cca7, preference):
+  "i like pizza"
+[2026-09-03T21:24:07] CMD: 'remember that my favorite color is blue' | TOOL: remember | PERMISSION: GRANTED -> RESULT: Saved memory (#e245979d, general):
+  "favorite color is blue"
+[2026-09-03T21:24:07] CMD: 'list memories' | TOOL: recall | PERMISSION: GRANTED -> RESULT: All memories (3):
+  [fcd6ed6a] (project) spidy's source code is in c:\spidy
+          saved: 2026-09-03T21:24:00
+  [f421cca7] (preference) i like pizza
+          saved: 2026-09-03T21:24:07
+  [e245979d] (general) favorite color is blue
+          saved: 2026-09-03T21:24:07
+[2026-09-03T21:24:07] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T21:24:07] CMD: 'search memories pizza' | TOOL: recall | PERMISSION: GRANTED -> RESULT: Memories matching 'pizza' (1):
+  [f421cca7] (preference) i like pizza
+          saved: 2026-09-03T21:24:07
+[2026-09-03T21:24:07] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T21:24:07] CMD: 'forget fcd6ed6a' | TOOL: forget | PERMISSION: GRANTED -> RESULT: Deleted memory #fcd6ed6a.
+[2026-09-03T21:24:07] CMD: 'list memories' | TOOL: recall | PERMISSION: GRANTED -> RESULT: All memories (2):
+  [f421cca7] (preference) i like pizza
+          saved: 2026-09-03T21:24:07
+  [e245979d] (general) favorite color is blue
+          saved: 2026-09-03T21:24:07

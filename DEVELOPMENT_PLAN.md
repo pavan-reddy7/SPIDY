@@ -205,6 +205,9 @@ Example:
 
 "Remember that SPIDY's source code is in C:\SPIDY."
 
+Status:
+COMPLETE
+
 
 ---
 

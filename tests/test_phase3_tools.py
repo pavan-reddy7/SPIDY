@@ -22,14 +22,14 @@ def _create_registry():
 # ================================================================== #
 
 def test_find_files_discovery():
-    """Test that 10 tools are discovered."""
+    """Test that Phase 3 tools are discovered (at least 10 total)."""
     print("Testing tool discovery count...")
     reg = _create_registry()
-    assert len(reg.get_all_tools()) == 10, f"Expected 10 tools, got {len(reg.get_all_tools())}"
+    assert len(reg.get_all_tools()) >= 10, f"Expected at least 10 tools, got {len(reg.get_all_tools())}"
     expected = ["find_files", "file_metadata", "read_file", "search_contents"]
     for name in expected:
         assert reg.get(name) is not None, f"Tool '{name}' not found"
-    print("PASS: 10 tools discovered including all Phase 3 tools")
+    print(f"PASS: {len(reg.get_all_tools())} tools discovered including all Phase 3 tools")
 
 
 def test_find_files_basic():

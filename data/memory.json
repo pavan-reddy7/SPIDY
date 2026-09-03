@@ -1,0 +1,14 @@
+[
+  {
+    "id": "f421cca7",
+    "text": "i like pizza",
+    "category": "preference",
+    "created_at": "2026-09-03T21:24:07"
+  },
+  {
+    "id": "e245979d",
+    "text": "favorite color is blue",
+    "category": "general",
+    "created_at": "2026-09-03T21:24:07"
+  }
+]
