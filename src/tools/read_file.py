@@ -22,6 +22,49 @@ from tools.list_directory import ALLOWED_ROOTS, _is_path_allowed, _has_path_trav
 from tools.find_files import _search_in_root
 
 
+def _sanitize_unicode_output(text: str) -> str:
+    """
+    Replace Unicode characters that cause issues in Windows console with ASCII equivalents.
+    This prevents UnicodeEncodeError when printing to console.
+    """
+    # Common Unicode characters that cause issues in Windows console (cp1252)
+    replacements = {
+        '→': '->',   # right arrow
+        '←': '<-',   # left arrow
+        '↔': '<->',  # left right arrow
+        '⇒': '=>',   # right double arrow
+        '⇐': '<=',   # left double arrow
+        '⇔': '<=>',  # left right double arrow
+        '√': 'sqrt', # square root
+        '∞': 'inf',  # infinity
+        '≈': '~=',   # approximately equal
+        '≠': '!=',   # not equal
+        '≤': '<=',   # less than or equal
+        '≥': '>=',   # greater than or equal
+        '²': '^2',   # superscript two
+        '³': '^3',   # superscript three
+        '¹': '^1',   # superscript one
+        '¼': '1/4',  # vulgar fraction one quarter
+        '½': '1/2',  # vulgar fraction one half
+        '¾': '3/4',  # vulgar fraction three quarters
+        '–': '-',    # en dash
+        '—': '-',    # em dash
+        '‘': "'",    # left single quotation mark
+        '’': "'",    # right single quotation mark
+        '“': '"',    # left double quotation mark
+        '”': '"',    # right double quotation mark
+        '•': '*',    # bullet
+        '…': '...',  # horizontal ellipsis
+        '′': "'",    # prime
+        '″': '"',    # double prime
+    }
+
+    result = text
+    for unicode_char, ascii_replacement in replacements.items():
+        result = result.replace(unicode_char, ascii_replacement)
+    return result
+
+
 # Safety limits
 MAX_LINES = 500
 MAX_BYTES = 50 * 1024  # 50 KB
@@ -194,9 +237,14 @@ class ReadFileTool(Tool):
             header = f"--- {file_path} ({len(content)} lines) ---\n"
             footer = f"\n--- (showing {MAX_LINES} of {len(content)} lines) ---" if truncated else ""
 
+            # Sanitize output for Windows console compatibility
+            safe_header = _sanitize_unicode_output(header)
+            safe_body = _sanitize_unicode_output(body)
+            safe_footer = _sanitize_unicode_output(footer)
+
             return ToolResult(
                 success=True,
-                message=header + body + footer,
+                message=safe_header + safe_body + safe_footer,
                 data={
                     "path": file_path,
                     "total_lines": len(content),

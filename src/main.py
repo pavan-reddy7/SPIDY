@@ -94,10 +94,14 @@ def main() -> None:
         result = tool.execute(**params)
 
         # --- Display result ---
+        def _sanitize_for_console(text: str) -> str:
+            # Replace non-ASCII characters with '?' to avoid UnicodeEncodeError in Windows console
+            return ''.join(c if ord(c) < 128 else '?' for c in text)
+
         if result.success:
-            print(result.message)
+            print(_sanitize_for_console(result.message))
         else:
-            print(f"Error: {result.message}")
+            print(f"Error: {_sanitize_for_console(result.message)}")
 
         # --- Log ---
         log_event(

@@ -109,3 +109,653 @@
 [2026-09-01T21:33:56] CMD: 'open chrome' | PERMISSION: DENIED -> RESULT: error: unknown intent
 [2026-09-01T21:34:09] CMD: 'open ms word' | PERMISSION: DENIED -> RESULT: error: unknown intent
 [2026-09-01T21:34:22] CMD: 'open folder spidy' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: error: Directory not found: spidy
+[2026-09-03T09:31:38] CMD: 'list files in C:\\SPIDY' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: Contents of C:\SPIDY:
+
+  Folders (6):
+    [DIR]  .claude
+    [DIR]  .git
+    [DIR]  .venv
+    [DIR]  data
+    [DIR]  src
+    [DIR]  tests
+
+  Files (11):
+    [FILE] .gitignore (141 B)
+    [FILE] CHANGELOG.md (3.7 KB)
+    [FILE] CLAUDE.md (2.2 KB)
+    [FILE] DEVELOPMENT_PLAN.md (6.9 KB)
+    [FILE] PRODUCT_VISION.md (9.9 KB)
+    [FILE] README.md (1.4 KB)
+    [FILE] _check_apps.py (2.0 KB)
+    [FILE] _debug.py (299 B)
+    [FILE] _verify_phase2.py (10.6 KB)
+    [FILE] test_functions.py (4.2 KB)
+    [FILE] test_interaction.py (1.8 KB)
+[2026-09-03T09:31:43] CMD: 'find files *.md in C:\\SPIDY' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: Found 5 file(s) matching '*.md':
+  C:\SPIDY\CHANGELOG.md  (3.7 KB)
+  C:\SPIDY\CLAUDE.md  (2.2 KB)
+  C:\SPIDY\DEVELOPMENT_PLAN.md  (6.9 KB)
+  C:\SPIDY\PRODUCT_VISION.md  (9.9 KB)
+  C:\SPIDY\README.md  (1.4 KB)
+[2026-09-03T09:31:48] CMD: 'get file metadata C:\\SPIDY\\README.md' | TOOL: file_metadata | PERMISSION: GRANTED -> RESULT: File: README.md
+  Path:     C:\SPIDY\README.md
+  Type:     Markdown
+  Size:     1.4 KB
+  Modified: 2026-08-31 22:31:39
+  Created:  2026-08-31 22:03:41
+[2026-09-03T09:31:59] CMD: 'read file C:\\SPIDY\\README.md' | TOOL: read_file | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-09-03T09:34:22] CMD: 'read file C:\\SPIDY\\README.md' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: --- C:\SPIDY\README.md (60 lines) ---
+# 🕷️ SPIDY
+
+## Personal AI Computer-Use Assistant
+
+SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks on the user's computer.
+
+The long-term goal is to build an assistant capable of:
+
+- Controlling Windows applications
+- Managing files
+- Executing development tasks
+- Browsing the web
+- Understanding the screen
+- Voice interaction
+- Personal memory
+- RAG over personal documents
+- Multi-step task execution
+- Error recovery
+- Permission-controlled computer actions
+
+## Project Status
+
+Currently under active development.
+
+Development follows the phases defined in:
+
+- `PRODUCT_VISION.md` - Complete vision and requirements
+- `DEVELOPMENT_PLAN.md` - Development roadmap
+- `CLAUDE.md` - Development instructions for Claude Code
+- `CHANGELOG.md` - Development history
+
+## Technology
+
+Initial stack:
+
+- Python
+- Windows
+- Virtual environment (`venv`)
+- Git
+
+Additional technologies will be introduced as required by each development phase.
+
+## Development Principle
+
+SPIDY is being built incrementally.
+
+The system starts with a small, safe MVP and gradually gains:
+
+1. Tool execution
+2. Computer control
+3. Memory
+4. Voice
+5. File operations
+6. Web automation
+7. RAG
+8. Screen understanding
+9. Multi-step workflows
+10. Reliability and security
+
+Safety and user control are core requirements of the project.
+[2026-09-03T09:34:33] CMD: 'read file C:\\SPIDY\\README.md' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: --- C:\SPIDY\README.md (60 lines) ---
+# 🕷️ SPIDY
+
+## Personal AI Computer-Use Assistant
+
+SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks on the user's computer.
+
+The long-term goal is to build an assistant capable of:
+
+- Controlling Windows applications
+- Managing files
+- Executing development tasks
+- Browsing the web
+- Understanding the screen
+- Voice interaction
+- Personal memory
+- RAG over personal documents
+- Multi-step task execution
+- Error recovery
+- Permission-controlled computer actions
+
+## Project Status
+
+Currently under active development.
+
+Development follows the phases defined in:
+
+- `PRODUCT_VISION.md` - Complete vision and requirements
+- `DEVELOPMENT_PLAN.md` - Development roadmap
+- `CLAUDE.md` - Development instructions for Claude Code
+- `CHANGELOG.md` - Development history
+
+## Technology
+
+Initial stack:
+
+- Python
+- Windows
+- Virtual environment (`venv`)
+- Git
+
+Additional technologies will be introduced as required by each development phase.
+
+## Development Principle
+
+SPIDY is being built incrementally.
+
+The system starts with a small, safe MVP and gradually gains:
+
+1. Tool execution
+2. Computer control
+3. Memory
+4. Voice
+5. File operations
+6. Web automation
+7. RAG
+8. Screen understanding
+9. Multi-step workflows
+10. Reliability and security
+
+Safety and user control are core requirements of the project.
+[2026-09-03T09:34:38] CMD: 'search contents assistant in C:\\SPIDY\\README.md' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:34:38] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:34:48] CMD: 'search text assistant in C:\\SPIDY\\README.md' | TOOL: search_contents | PERMISSION: GRANTED -> RESULT: error: Directory not found: c:\spidy\readme.md
+[2026-09-03T09:34:52] CMD: 'search text assistant in C:\\SPIDY' | TOOL: search_contents | PERMISSION: GRANTED -> RESULT: Found 17 match(es) for 'assistant' in 5 file(s):
+
+  C:\SPIDY\CLAUDE.md:
+    Line    5: SPIDY is a personal AI computer-use assistant for Windows.
+
+  C:\SPIDY\PRODUCT_VISION.md:
+    Line    1: # SPIDY — Personal AI Computer-Use Assistant
+    Line    5: SPIDY is a personal AI computer-use assistant for Windows.
+    Line  203: SPIDY should eventually act as a development assistant.
+
+  C:\SPIDY\README.md:
+    Line    3: ## Personal AI Computer-Use Assistant
+    Line    5: SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks o...
+    Line    7: The long-term goal is to build an assistant capable of:
+
+  C:\SPIDY\data\audit.log:
+    Line  150: ## Personal AI Computer-Use Assistant
+    Line  152: SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks o...
+    Line  154: The long-term goal is to build an assistant capable of:
+    Line  211: ## Personal AI Computer-Use Assistant
+    Line  213: SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks o...
+    Line  215: The long-term goal is to build an assistant capable of:
+    Line  269: [2026-09-03T09:34:38] CMD: 'search contents assistant in C:\\SPIDY\\README.md' | PERMISSION: DENIED -> RESULT: error: un...
+    Line  271: [2026-09-03T09:34:48] CMD: 'search text assistant in C:\\SPIDY\\README.md' | TOOL: search_contents | PERMISSION: GRANTED...
+
+  C:\SPIDY\src\main.py:
+    Line    3: SPIDY — Personal AI Computer-Use Assistant
+    Line   33:     print("=== SPIDY — Personal AI Computer-Use Assistant ===")
+[2026-09-03T09:34:59] CMD: 'find files *.py in C:\\SPIDY\\src' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: Found 16 file(s) matching '*.py':
+  C:\SPIDY\src\intent_parser.py  (3.8 KB)
+  C:\SPIDY\src\logger.py  (1.1 KB)
+  C:\SPIDY\src\main.py  (4.3 KB)
+  C:\SPIDY\src\test_main.py  (4.5 KB)
+  C:\SPIDY\src\tool_base.py  (4.5 KB)
+  C:\SPIDY\src\tools\active_window.py  (2.8 KB)
+  C:\SPIDY\src\tools\file_metadata.py  (5.9 KB)
+  C:\SPIDY\src\tools\find_files.py  (6.4 KB)
+  C:\SPIDY\src\tools\list_directory.py  (8.6 KB)
+  C:\SPIDY\src\tools\open_application.py  (7.4 KB)
+  C:\SPIDY\src\tools\open_folder.py  (5.7 KB)
+  C:\SPIDY\src\tools\read_file.py  (8.7 KB)
+  C:\SPIDY\src\tools\search_contents.py  (8.9 KB)
+  C:\SPIDY\src\tools\system_info.py  (4.6 KB)
+  C:\SPIDY\src\tools\window_management.py  (4.5 KB)
+  C:\SPIDY\src\tools\__init__.py  (102 B)
+[2026-09-03T09:35:42] CMD: 'list files in C:\\SPIDY\\..\\Windows' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: error: Path traversal (..) is not allowed for security reasons.
+[2026-09-03T09:35:56] CMD: 'list my documents' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: Contents of C:\Users\pavan\Documents:
+
+  Folders (4):
+    [DIR]  Codex
+    [DIR]  My Music
+    [DIR]  My Videos
+    [DIR]  antigravity
+
+  Files (1):
+    [FILE] My Pictures
+[2026-09-03T09:36:07] CMD: 'get file metadata C:\\SPIDY\\src\\main.py' | TOOL: file_metadata | PERMISSION: GRANTED -> RESULT: File: main.py
+  Path:     C:\SPIDY\src\main.py
+  Type:     Python script
+  Size:     4.3 KB
+  Modified: 2026-09-03 09:34:16
+  Created:  2026-09-03 09:34:16
+[2026-09-03T09:36:15] CMD: 'read file C:\\SPIDY\\README.md' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: --- C:\SPIDY\README.md (60 lines) ---
+# 🕷️ SPIDY
+
+## Personal AI Computer-Use Assistant
+
+SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks on the user's computer.
+
+The long-term goal is to build an assistant capable of:
+
+- Controlling Windows applications
+- Managing files
+- Executing development tasks
+- Browsing the web
+- Understanding the screen
+- Voice interaction
+- Personal memory
+- RAG over personal documents
+- Multi-step task execution
+- Error recovery
+- Permission-controlled computer actions
+
+## Project Status
+
+Currently under active development.
+
+Development follows the phases defined in:
+
+- `PRODUCT_VISION.md` - Complete vision and requirements
+- `DEVELOPMENT_PLAN.md` - Development roadmap
+- `CLAUDE.md` - Development instructions for Claude Code
+- `CHANGELOG.md` - Development history
+
+## Technology
+
+Initial stack:
+
+- Python
+- Windows
+- Virtual environment (`venv`)
+- Git
+
+Additional technologies will be introduced as required by each development phase.
+
+## Development Principle
+
+SPIDY is being built incrementally.
+
+The system starts with a small, safe MVP and gradually gains:
+
+1. Tool execution
+2. Computer control
+3. Memory
+4. Voice
+5. File operations
+6. Web automation
+7. RAG
+8. Screen understanding
+9. Multi-step workflows
+10. Reliability and security
+
+Safety and user control are core requirements of the project.
+[2026-09-03T09:36:25] CMD: 'list files in C:\\Windows' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: error: Access denied: 'C:\Windows' is not in the allowed directories.
+Allowed: C:\Users\pavan/Desktop, C:\Users\pavan/Documents, C:\Users\pavan/Downloads, C:\SPIDY
+[2026-09-03T09:36:30] CMD: 'find files *.exe in C:\\Windows' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: error: Access denied: 'c:\windows' is not in the allowed directories.
+Allowed: C:\Users\pavan/Desktop, C:\Users\pavan/Documents, C:\Users\pavan/Downloads, C:\SPIDY
+[2026-09-03T09:36:35] CMD: 'list files in C:\\SPIDY\\..\\Windows' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: error: Path traversal (..) is not allowed for security reasons.
+[2026-09-03T09:36:39] CMD: 'read file C:\\SPIDY' | TOOL: read_file | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-09-03T09:36:39] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:36:44] CMD: 'read file C:\\SPIDY' | TOOL: read_file | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-09-03T09:36:44] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:38:50] CMD: 'find files named README.md' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: No files matching 'named readme.md' found in C:\Users\pavan/Desktop, C:\Users\pavan/Documents, C:\Users\pavan/Downloads, C:\SPIDY.
+[2026-09-03T09:39:02] CMD: 'fin file spidy' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:39:12] CMD: 'find file spidy' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: No files matching 'spidy' found in C:\Users\pavan/Desktop, C:\Users\pavan/Documents, C:\Users\pavan/Downloads, C:\SPIDY.
+[2026-09-03T09:39:31] CMD: 'find file SPIDY' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: No files matching 'spidy' found in C:\Users\pavan/Desktop, C:\Users\pavan/Documents, C:\Users\pavan/Downloads, C:\SPIDY.
+[2026-09-03T09:40:03] CMD: 'open chrome' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Google Chrome is now open.
+[2026-09-03T09:40:13] CMD: 'open file spidy' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: error: File 'spidy' not found in allowed directories.
+[2026-09-03T09:40:23] CMD: 'open file downloads' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: error: File 'downloads' not found in allowed directories.
+[2026-09-03T09:46:11] CMD: 'open notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-03T09:46:11] CMD: 'list files in C:\\SPIDY' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: Contents of C:\SPIDY:
+
+  Folders (6):
+    [DIR]  .claude
+    [DIR]  .git
+    [DIR]  .venv
+    [DIR]  data
+    [DIR]  src
+    [DIR]  tests
+
+  Files (12):
+    [FILE] .gitignore (141 B)
+    [FILE] CHANGELOG.md (3.7 KB)
+    [FILE] CLAUDE.md (2.2 KB)
+    [FILE] DEVELOPMENT_PLAN.md (6.9 KB)
+    [FILE] PRODUCT_VISION.md (9.9 KB)
+    [FILE] README.md (1.4 KB)
+    [FILE] _check_apps.py (2.0 KB)
+    [FILE] _debug.py (299 B)
+    [FILE] _verify_phase2.py (10.6 KB)
+    [FILE] test_functions.py (4.2 KB)
+    [FILE] test_interaction.py (1.8 KB)
+    [FILE] tmp_manual_test.py (1.5 KB)
+[2026-09-03T09:46:11] CMD: 'system info' | TOOL: get_system_info | PERMISSION: GRANTED -> RESULT: System Information:
+  OS:           Windows 11 (10.0.26200)
+  Hostname:     LAPTOP-R1IE4T5U
+  CPU:          Intel64 Family 6 Model 183 Stepping 1, GenuineIntel (28 cores)
+  RAM:          15.7 GB total, 2.9 GB available (81% used)
+  Disk:         C: 475.9 GB total, 114.1 GB free (76% used)
+  Uptime:       3d 20h 15m
+  Architecture: AMD64
+  Python:       3.13.15
+[2026-09-03T09:46:11] CMD: 'active window' | TOOL: get_active_window | PERMISSION: GRANTED -> RESULT: Active window: "Resume project ideas - Google Chrome" (chrome.exe)
+[2026-09-03T09:46:11] CMD: 'find files *.md in C:\\SPIDY' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: Found 5 file(s) matching '*.md':
+  C:\SPIDY\CHANGELOG.md  (3.7 KB)
+  C:\SPIDY\CLAUDE.md  (2.2 KB)
+  C:\SPIDY\DEVELOPMENT_PLAN.md  (6.9 KB)
+  C:\SPIDY\PRODUCT_VISION.md  (9.9 KB)
+  C:\SPIDY\README.md  (1.4 KB)
+[2026-09-03T09:46:11] CMD: 'read file C:\\SPIDY\\README.md' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: --- C:\SPIDY\README.md (60 lines) ---
+# 🕷️ SPIDY
+
+## Personal AI Computer-Use Assistant
+
+SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks on the user's computer.
+
+The long-term goal is to build an assistant capable of:
+
+- Controlling Windows applications
+- Managing files
+- Executing development tasks
+- Browsing the web
+- Understanding the screen
+- Voice interaction
+- Personal memory
+- RAG over personal documents
+- Multi-step task execution
+- Error recovery
+- Permission-controlled computer actions
+
+## Project Status
+
+Currently under active development.
+
+Development follows the phases defined in:
+
+- `PRODUCT_VISION.md` - Complete vision and requirements
+- `DEVELOPMENT_PLAN.md` - Development roadmap
+- `CLAUDE.md` - Development instructions for Claude Code
+- `CHANGELOG.md` - Development history
+
+## Technology
+
+Initial stack:
+
+- Python
+- Windows
+- Virtual environment (`venv`)
+- Git
+
+Additional technologies will be introduced as required by each development phase.
+
+## Development Principle
+
+SPIDY is being built incrementally.
+
+The system starts with a small, safe MVP and gradually gains:
+
+1. Tool execution
+2. Computer control
+3. Memory
+4. Voice
+5. File operations
+6. Web automation
+7. RAG
+8. Screen understanding
+9. Multi-step workflows
+10. Reliability and security
+
+Safety and user control are core requirements of the project.
+[2026-09-03T09:46:11] CMD: 'search text assistant in C:\\SPIDY' | TOOL: search_contents | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-09-03T09:46:11] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:46:17] CMD: 'open notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-09-03T09:46:17] CMD: 'list files in C:\\SPIDY' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: Contents of C:\SPIDY:
+
+  Folders (6):
+    [DIR]  .claude
+    [DIR]  .git
+    [DIR]  .venv
+    [DIR]  data
+    [DIR]  src
+    [DIR]  tests
+
+  Files (12):
+    [FILE] .gitignore (141 B)
+    [FILE] CHANGELOG.md (3.7 KB)
+    [FILE] CLAUDE.md (2.2 KB)
+    [FILE] DEVELOPMENT_PLAN.md (6.9 KB)
+    [FILE] PRODUCT_VISION.md (9.9 KB)
+    [FILE] README.md (1.4 KB)
+    [FILE] _check_apps.py (2.0 KB)
+    [FILE] _debug.py (299 B)
+    [FILE] _verify_phase2.py (10.6 KB)
+    [FILE] test_functions.py (4.2 KB)
+    [FILE] test_interaction.py (1.8 KB)
+    [FILE] tmp_manual_test.py (1.5 KB)
+[2026-09-03T09:46:17] CMD: 'system info' | TOOL: get_system_info | PERMISSION: GRANTED -> RESULT: System Information:
+  OS:           Windows 11 (10.0.26200)
+  Hostname:     LAPTOP-R1IE4T5U
+  CPU:          Intel64 Family 6 Model 183 Stepping 1, GenuineIntel (28 cores)
+  RAM:          15.7 GB total, 2.8 GB available (82% used)
+  Disk:         C: 475.9 GB total, 114.1 GB free (76% used)
+  Uptime:       3d 20h 15m
+  Architecture: AMD64
+  Python:       3.13.15
+[2026-09-03T09:46:17] CMD: 'active window' | TOOL: get_active_window | PERMISSION: GRANTED -> RESULT: Active window: "Resume project ideas - Google Chrome" (chrome.exe)
+[2026-09-03T09:46:17] CMD: 'find files *.md in C:\\SPIDY' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: Found 5 file(s) matching '*.md':
+  C:\SPIDY\CHANGELOG.md  (3.7 KB)
+  C:\SPIDY\CLAUDE.md  (2.2 KB)
+  C:\SPIDY\DEVELOPMENT_PLAN.md  (6.9 KB)
+  C:\SPIDY\PRODUCT_VISION.md  (9.9 KB)
+  C:\SPIDY\README.md  (1.4 KB)
+[2026-09-03T09:46:17] CMD: 'read file C:\\SPIDY\\README.md' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: --- C:\SPIDY\README.md (60 lines) ---
+# 🕷️ SPIDY
+
+## Personal AI Computer-Use Assistant
+
+SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks on the user's computer.
+
+The long-term goal is to build an assistant capable of:
+
+- Controlling Windows applications
+- Managing files
+- Executing development tasks
+- Browsing the web
+- Understanding the screen
+- Voice interaction
+- Personal memory
+- RAG over personal documents
+- Multi-step task execution
+- Error recovery
+- Permission-controlled computer actions
+
+## Project Status
+
+Currently under active development.
+
+Development follows the phases defined in:
+
+- `PRODUCT_VISION.md` - Complete vision and requirements
+- `DEVELOPMENT_PLAN.md` - Development roadmap
+- `CLAUDE.md` - Development instructions for Claude Code
+- `CHANGELOG.md` - Development history
+
+## Technology
+
+Initial stack:
+
+- Python
+- Windows
+- Virtual environment (`venv`)
+- Git
+
+Additional technologies will be introduced as required by each development phase.
+
+## Development Principle
+
+SPIDY is being built incrementally.
+
+The system starts with a small, safe MVP and gradually gains:
+
+1. Tool execution
+2. Computer control
+3. Memory
+4. Voice
+5. File operations
+6. Web automation
+7. RAG
+8. Screen understanding
+9. Multi-step workflows
+10. Reliability and security
+
+Safety and user control are core requirements of the project.
+[2026-09-03T09:46:17] CMD: 'search text assistant in C:\\SPIDY' | TOOL: search_contents | PERMISSION: GRANTED -> RESULT: Found 46 match(es) for 'assistant' in 6 file(s):
+
+  C:\SPIDY\CLAUDE.md:
+    Line    5: SPIDY is a personal AI computer-use assistant for Windows.
+
+  C:\SPIDY\PRODUCT_VISION.md:
+    Line    1: # SPIDY — Personal AI Computer-Use Assistant
+    Line    5: SPIDY is a personal AI computer-use assistant for Windows.
+    Line  203: SPIDY should eventually act as a development assistant.
+
+  C:\SPIDY\README.md:
+    Line    3: ## Personal AI Computer-Use Assistant
+    Line    5: SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks o...
+    Line    7: The long-term goal is to build an assistant capable of:
+
+  C:\SPIDY\tmp_manual_test.py:
+    Line   31:     f.write('SPIDY test document\nPhase 3 file operations\ncomputer assistant')
+
+  C:\SPIDY\data\audit.log:
+    Line  150: ## Personal AI Computer-Use Assistant
+    Line  152: SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks o...
+    Line  154: The long-term goal is to build an assistant capable of:
+    Line  211: ## Personal AI Computer-Use Assistant
+    Line  213: SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks o...
+    Line  215: The long-term goal is to build an assistant capable of:
+    Line  269: [2026-09-03T09:34:38] CMD: 'search contents assistant in C:\\SPIDY\\README.md' | PERMISSION: DENIED -> RESULT: error: un...
+    Line  271: [2026-09-03T09:34:48] CMD: 'search text assistant in C:\\SPIDY\\README.md' | TOOL: search_contents | PERMISSION: GRANTED...
+    Line  272: [2026-09-03T09:34:52] CMD: 'search text assistant in C:\\SPIDY' | TOOL: search_contents | PERMISSION: GRANTED -> RESULT:...
+    Line  275:     Line    5: SPIDY is a personal AI computer-use assistant for Windows.
+    ... (26 more matches in this file)
+
+  C:\SPIDY\src\main.py:
+    Line    3: SPIDY — Personal AI Computer-Use Assistant
+    Line   33:     print("=== SPIDY — Personal AI Computer-Use Assistant ===")
+[2026-09-03T09:46:21] CMD: 'list files in C:\\Windows' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: error: Access denied: 'C:\Windows' is not in the allowed directories.
+Allowed: C:\Users\pavan/Desktop, C:\Users\pavan/Documents, C:\Users\pavan/Downloads, C:\SPIDY
+[2026-09-03T09:50:06] CMD: 'python -u "c:\\SPIDY\\src\\main.py"' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:50:35] CMD: 'find_file SPIDY' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T09:51:05] CMD: 'open folder SPIDY' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: Opened folder: C:\SPIDY
+[2026-09-03T09:51:18] CMD: 'open folder documents' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: Opened folder: C:\Users\pavan\Documents
+[2026-09-03T09:51:36] CMD: 'open folder downloads' | TOOL: open_folder | PERMISSION: GRANTED -> RESULT: Opened folder: C:\Users\pavan\Downloads
+[2026-09-03T09:57:02] CMD: 'active window' | TOOL: get_active_window | PERMISSION: GRANTED -> RESULT: Active window: "main.py - SPIDY - Visual Studio Code" (Code.exe)
+[2026-09-03T09:57:10] CMD: 'system info' | TOOL: get_system_info | PERMISSION: GRANTED -> RESULT: System Information:
+  OS:           Windows 11 (10.0.26200)
+  Hostname:     LAPTOP-R1IE4T5U
+  CPU:          Intel64 Family 6 Model 183 Stepping 1, GenuineIntel (28 cores)
+  RAM:          15.7 GB total, 3.7 GB available (76% used)
+  Disk:         C: 475.9 GB total, 114.5 GB free (76% used)
+  Uptime:       3d 20h 26m
+  Architecture: AMD64
+  Python:       3.13.11
+[2026-09-03T09:57:18] CMD: 'open terminal' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Terminal is now open.
+[2026-09-03T09:59:33] CMD: 'list files in C:\\SPIDY' | TOOL: list_directory | PERMISSION: GRANTED -> RESULT: Contents of C:\SPIDY:
+
+  Folders (7):
+    [DIR]  .claude
+    [DIR]  .git
+    [DIR]  .pytest_cache
+    [DIR]  .venv
+    [DIR]  data
+    [DIR]  src
+    [DIR]  tests
+
+  Files (11):
+    [FILE] .gitignore (141 B)
+    [FILE] CHANGELOG.md (3.7 KB)
+    [FILE] CLAUDE.md (2.2 KB)
+    [FILE] DEVELOPMENT_PLAN.md (6.9 KB)
+    [FILE] PRODUCT_VISION.md (9.9 KB)
+    [FILE] README.md (1.4 KB)
+    [FILE] _check_apps.py (2.0 KB)
+    [FILE] _debug.py (299 B)
+    [FILE] _verify_phase2.py (10.6 KB)
+    [FILE] test_functions.py (4.2 KB)
+    [FILE] test_interaction.py (1.8 KB)
+[2026-09-03T09:59:59] CMD: 'find files named main.py' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: No files matching 'named main.py' found in C:\Users\pavan/Desktop, C:\Users\pavan/Documents, C:\Users\pavan/Downloads, C:\SPIDY.
+[2026-09-03T10:00:18] CMD: 'find *.py' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T10:00:45] CMD: 'find file README.md' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: Found 3 file(s) matching 'readme.md':
+  C:\Users\pavan/Documents\Codex\2026-06-02\give-me-code-for-the-calculator\README.md  (799 B)
+  C:\Users\pavan/Documents\Codex\2026-06-02\give-me-code-for-the-calculator\outputs\web-calculator-project\README.md  (799 B)
+  C:\SPIDY\README.md  (1.4 KB)
+[2026-09-03T10:01:08] CMD: 'read C:\\SPIDY\\README.md' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-09-03T10:01:35] CMD: 'read file c:\\\\SPIDY\\\\README.md' | TOOL: read_file | PERMISSION: GRANTED -> RESULT: --- C:\SPIDY\README.md (60 lines) ---
+# 🕷️ SPIDY
+
+## Personal AI Computer-Use Assistant
+
+SPIDY is a personal AI assistant for Windows designed to understand natural-language commands and safely perform tasks on the user's computer.
+
+The long-term goal is to build an assistant capable of:
+
+- Controlling Windows applications
+- Managing files
+- Executing development tasks
+- Browsing the web
+- Understanding the screen
+- Voice interaction
+- Personal memory
+- RAG over personal documents
+- Multi-step task execution
+- Error recovery
+- Permission-controlled computer actions
+
+## Project Status
+
+Currently under active development.
+
+Development follows the phases defined in:
+
+- `PRODUCT_VISION.md` - Complete vision and requirements
+- `DEVELOPMENT_PLAN.md` - Development roadmap
+- `CLAUDE.md` - Development instructions for Claude Code
+- `CHANGELOG.md` - Development history
+
+## Technology
+
+Initial stack:
+
+- Python
+- Windows
+- Virtual environment (`venv`)
+- Git
+
+Additional technologies will be introduced as required by each development phase.
+
+## Development Principle
+
+SPIDY is being built incrementally.
+
+The system starts with a small, safe MVP and gradually gains:
+
+1. Tool execution
+2. Computer control
+3. Memory
+4. Voice
+5. File operations
+6. Web automation
+7. RAG
+8. Screen understanding
+9. Multi-step workflows
+10. Reliability and security
+
+Safety and user control are core requirements of the project.
+[2026-09-03T10:02:00] CMD: 'search for SPIDY in C:\\SPIDY' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: No files matching 'spidy' found in c:\spidy.
+[2026-09-03T10:02:11] CMD: 'search for README.md in C:\\SPIDY' | TOOL: find_files | PERMISSION: GRANTED -> RESULT: Found 1 file(s) matching 'readme.md':
+  C:\SPIDY\README.md  (1.4 KB)
+[2026-09-03T10:03:07] CMD: 'metadata for C:\\\\SPIDY\\\\README.md' | PERMISSION: DENIED -> RESULT: error: unknown intent

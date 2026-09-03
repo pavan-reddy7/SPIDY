@@ -5,6 +5,10 @@ import sys
 
 LOG_FILE = pathlib.Path(__file__).resolve().parents[1] / "data" / "audit.log"
 
+def _sanitize_for_console(text: str) -> str:
+    # Replace non-ASCII characters with '?' to avoid UnicodeEncodeError in Windows console
+    return ''.join(c if ord(c) < 128 else '?' for c in text)
+
 def log_event(command: str, result: str, tool_name: str | None = None, permission: str | None = None) -> None:
     """Append a single line to the audit log."""
     timestamp = datetime.datetime.now().isoformat(timespec='seconds')
@@ -15,5 +19,5 @@ def log_event(command: str, result: str, tool_name: str | None = None, permissio
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
     with LOG_FILE.open("a", encoding="utf-8") as f:
         f.write(line)
-    # Also echo to console for immediate feedback
-    print(line, end="")
+    # Also echo to console for immediate feedback (sanitized)
+    print(_sanitize_for_console(line), end="")
