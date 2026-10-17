@@ -567,7 +567,7 @@ class TestIntentParsingAndRegression:
 
     def test_all_10_tools_discovered(self, registry):
         tools = registry.get_all_tools()
-        assert len(tools) == 15
+        assert len(tools) == 32
         expected_names = {
             "open_application",
             "get_system_info",
@@ -584,6 +584,23 @@ class TestIntentParsingAndRegression:
             "forget",
             "speech_to_text",
             "text_to_speech",
+            "create_file",
+            "edit_file",
+            "delete_file",
+            "rename_file",
+            "move_file",
+            "create_directory",
+            "close_browser",
+            "download_file",
+            "fill_form",
+            "navigate_url",
+            "open_browser",
+            "web_search",
+            "read_page",
+            "click_element",
+            "index_documents",
+            "ask_documents",
+            "manage_index",
         }
         actual_names = set(registry.get_tool_names())
         assert actual_names == expected_names

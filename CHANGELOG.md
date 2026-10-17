@@ -2,6 +2,25 @@
 
 All notable changes to the SPIDY project will be documented in this file.
 
+## [Phase 8 - Personal RAG] - 2026-10-17
+
+### Added
+- **Document parsers**: `src/rag_parsers.py` — extracts plain text from TXT, Markdown, PDF (via pypdf), DOCX (via python-docx), and XLSX (via openpyxl). Enforces 10 MB file-size limit.
+- **RAG document store**: `src/rag_store.py` — JSON-backed index (`data/rag_index.json`) with document metadata, content-hash deduplication, and chunk storage (`data/rag_chunks/`). Capped at 1,000 documents.
+- **RAG engine**: `src/rag_engine.py` — sentence-aware text chunking (2,000 chars, 250 overlap), TF-IDF vectorization via scikit-learn, cosine-similarity search, and incremental indexing pipeline.
+- **3 new tool plugins**:
+  - `index_documents` — Index files or folders for RAG search (e.g. `index documents C:\SPIDY`)
+  - `ask_documents` — Query indexed documents with natural language (e.g. `ask documents what are permissions`)
+  - `manage_index` — List, delete, re-index, or clear indexed documents (e.g. `list indexed`, `clear index`)
+- **New dependencies**: pypdf, python-docx, openpyxl, scikit-learn (+ numpy, scipy, joblib, lxml)
+- **Test suite**: `tests/test_phase8_rag.py` — 41 tests covering parsers, chunking, store CRUD, engine pipeline, tool plugins, integration, and intent routing. 100% pass rate.
+
+### Design Decisions
+- **Fully local**: TF-IDF embeddings via scikit-learn — no API keys or network calls needed.
+- **Incremental indexing**: Content-hash based — unchanged files are skipped on re-index.
+- **Source references**: Every search result cites the source filename and chunk number.
+- **Security**: Only files within `ALLOWED_ROOTS` can be indexed. Path traversal blocked. CONFIRM permission for index/delete operations.
+
 ## [Phase 4 - Memory & Context] - 2026-09-03
 
 ### Added

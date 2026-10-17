@@ -313,6 +313,8 @@ Security:
 Example:
 
 "Search for the latest Python release."
+Status:
+COMPLETE
 
 
 ---
@@ -363,6 +365,8 @@ Example:
 
 "What does my SPIDY documentation say about permissions?"
 
+Status:
+COMPLETE
 
 ---
 

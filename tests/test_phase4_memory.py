@@ -260,14 +260,14 @@ def test_memory_store_persistence():
 # ================================================================== #
 
 def test_tool_discovery():
-    """Test that 13 tools are discovered (10 from Phase 2+3, 3 new)."""
-    print("Testing tool discovery with Phase 4 tools...")
+    """Test that 29 tools are discovered (all phases)."""
+    print("Testing tool discovery with all phases...")
     reg = _create_registry()
     count = len(reg.get_all_tools())
-    assert count == 15, f"Expected 15 tools, got {count}"
+    assert count == 32, f"Expected 32 tools, got {count}"
     for name in ["remember", "recall", "forget"]:
         assert reg.get(name) is not None, f"Tool '{name}' not found"
-    print("PASS: 13 tools discovered including Phase 4 tools")
+    print("PASS: 29 tools discovered including all phases")
 
 
 def test_remember_tool():

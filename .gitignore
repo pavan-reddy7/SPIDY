@@ -9,3 +9,7 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# RAG data (user-specific runtime data)
+data/rag_index.json
+data/rag_chunks/
