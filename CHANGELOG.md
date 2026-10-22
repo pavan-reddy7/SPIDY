@@ -2,6 +2,26 @@
 
 All notable changes to the SPIDY project will be documented in this file.
 
+## [Phase 9 - Screen Understanding] - 2026-10-22
+
+### Added
+- **Screen capture engine**: `src/screen_capture.py` — captures full desktop, active window, and arbitrary bounding box regions via Win32 GDI BitBlt and Pillow ImageGrab fallback. Automatic filename generation with microsecond timestamps and auto-cleanup retaining the most recent 50 screenshots in `data/screenshots/`.
+- **OCR engine**: `src/ocr_engine.py` — fully local optical character recognition powered by Windows built-in WinRT OCR (`Windows.Media.Ocr` via `winocr`). Provides structured line-level text extraction with bounding boxes, case-insensitive substring search, and text summaries.
+- **UI inspector**: `src/ui_inspector.py` — detects and enumerates visible top-level windows (process name, HWND, geometry, z-order) and child UI controls (buttons, text fields, labels, list views, etc.) using ctypes Win32 API. Provides full screen structure representation.
+- **4 new tool plugins**:
+  - `screenshot` — Capture full desktop or active window and list saved screenshots (`take a screenshot`, `capture screen`, `screenshot window`).
+  - `read_screen` — Extract all visible text from the desktop or active window via OCR (`read screen`, `read my screen`, `ocr screen`).
+  - `describe_screen` — Overview of open windows, active window, resolution, and visible UI controls (`what is on my screen`, `describe screen`).
+  - `find_on_screen` — Locate specific text, buttons, or controls using combined UI inspection and OCR (`find on screen Submit`, `find button OK`).
+- **Dependencies**: `Pillow`, `winocr`
+- **Test suite**: `tests/test_phase9_screen.py` — 43 tests covering screen capture, OCR engine, UI inspector, tool plugins, intent routing, and security permissions. All 225 test suite tests passing.
+
+### Design Decisions
+- **Rock-solid capture**: Win32 GDI BitBlt as primary capture method avoids failures in background and locked sessions.
+- **Non-blocking OCR**: ThreadPool execution prevents event-loop collisions with async WinRT operations.
+- **Safe permissions**: All 4 screen understanding tools are marked `PERMISSION_SAFE` (read-only desktop inspection).
+- **Data privacy**: Screenshots are saved locally only (`data/screenshots/` excluded in `.gitignore`), no network calls.
+
 ## [Phase 8 - Personal RAG] - 2026-10-17
 
 ### Added

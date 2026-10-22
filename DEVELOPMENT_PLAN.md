@@ -284,6 +284,8 @@ System modifications:
 
 Every action must be logged.
 
+Status:
+COMPLETE
 
 ---
 
@@ -392,6 +394,9 @@ Example:
 Later:
 
 "Find the Submit button."
+
+Status:
+COMPLETE
 
 
 ---
