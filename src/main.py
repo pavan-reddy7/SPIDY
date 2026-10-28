@@ -18,10 +18,14 @@ import sys
 from logger import log_event
 from tool_base import ToolRegistry, PERMISSION_SAFE, PERMISSION_CONFIRM, PERMISSION_HIGH_RISK, PERMISSION_BLOCKED
 from intent_parser import parse_intent
+from llm_brain import LLMBrain
 
 
 # Short-term session memory: list of recent interactions
 SESSION_HISTORY_MAX = 10
+
+# Auto-confirm protected actions with 'yes' by default (no y/n prompt)
+AUTO_CONFIRM = os.environ.get("SPIDY_AUTO_CONFIRM", "true").lower() in ("true", "1", "yes")
 
 
 def create_registry() -> ToolRegistry:
@@ -35,13 +39,20 @@ def create_registry() -> ToolRegistry:
 def main() -> None:
     registry = create_registry()
     tool_names = registry.get_tool_names()
+    brain = LLMBrain(registry)
 
     # Short-term memory: recent interactions within this session
     session_history: list[dict] = []
 
+    # Check for --voice or -v flag
+    if any(arg in sys.argv for arg in ["--voice", "-v", "voice"]):
+        from voice_loop import run_voice_loop
+        run_voice_loop(registry, session_history)
+        return
+
     print("=== SPIDY — Personal AI Computer-Use Assistant ===")
     print(f"    {len(tool_names)} tools loaded: {', '.join(tool_names)}")
-    print("    Type a command or 'help' for available tools. Type 'exit' to quit.\n")
+    print("    Type a command or 'help'. Type 'voice' for 100% hands-free voice mode. Type 'exit' to quit.\n")
 
     while True:
         try:
@@ -66,70 +77,42 @@ def main() -> None:
             _print_history(session_history)
             continue
 
-        # --- Intent matching ---
-        match = parse_intent(stripped, registry)
-
-        if match is None:
-            print("Sorry, I don't understand that command. Type 'help' for available tools.")
-            log_event(user_input, "error: unknown intent", permission="DENIED")
-            # Record in session history
-            _add_to_history(session_history, stripped, None, "Unknown command")
+        if stripped.lower() in ["voice", "voice mode", "start voice"]:
+            from voice_loop import run_voice_loop
+            run_voice_loop(registry, session_history)
             continue
 
-        tool, params = match
-
-        # Pass the matched keyword to the tool so it knows what was matched
-        # The keyword is embedded during intent parsing — use tool name as fallback
-        if "_keyword" not in params:
-            params["_keyword"] = tool.name
-
-        # --- Permission check ---
-        if tool.permission_level == PERMISSION_BLOCKED:
-            print("Action blocked by security policy.")
-            log_event(user_input, "error: blocked", tool_name=tool.name, permission="BLOCKED")
-            _add_to_history(session_history, stripped, tool.name, "Blocked by security policy")
-            continue
-
-        if tool.permission_level in (PERMISSION_CONFIRM, PERMISSION_HIGH_RISK):
+        # --- LLM Brain Processing (with automatic deterministic fallback) ---
+        def _console_confirm(tool_name: str, perm_level: str) -> bool:
+            risk_label = " [HIGH RISK]" if perm_level == PERMISSION_HIGH_RISK else ""
             try:
-                risk_label = ""
-                if tool.permission_level == PERMISSION_HIGH_RISK:
-                    risk_label = " [HIGH RISK]"
-                answer = input(f"About to run '{tool.name}'{risk_label}. Continue? (y/n) ").strip().lower()
+                ans = input(f"About to run '{tool_name}'{risk_label}. Continue? (y/n) ").strip().lower()
+                return ans == "y"
             except (EOFError, KeyboardInterrupt):
-                print("\nAction cancelled.")
-                log_event(user_input, "cancelled by user", tool_name=tool.name, permission="CANCELLED")
-                _add_to_history(session_history, stripped, tool.name, "Cancelled by user")
-                continue
+                return False
 
-            if answer != "y":
-                print("Action cancelled.")
-                log_event(user_input, "cancelled by user", tool_name=tool.name, permission="CANCELLED")
-                _add_to_history(session_history, stripped, tool.name, "Cancelled by user")
-                continue
-
-        # --- Execute ---
-        result = tool.execute(**params)
-
-        # --- Display result ---
-        if result.success:
-            print(_sanitize_for_console(result.message))
-        else:
-            print(f"Error: {_sanitize_for_console(result.message)}")
-
-        # --- Log ---
-        log_event(
-            user_input,
-            result.message if result.success else f"error: {result.message}",
-            tool_name=tool.name,
-            permission="GRANTED"
+        res = brain.process(
+            stripped,
+            on_confirm=_console_confirm,
+            auto_confirm=AUTO_CONFIRM
         )
 
-        # --- Record in session history ---
-        summary = result.message
+        speaker_label = f"[{brain.personality.upper()}]" if res.used_llm else "[SPIDY]"
+        print(f"\n{speaker_label}: {_sanitize_for_console(res.response_text)}\n")
+
+        # Log
+        log_event(
+            user_input,
+            res.response_text if res.success else f"error: {res.response_text}",
+            tool_name=res.tool_name,
+            permission="GRANTED" if res.success else "DENIED",
+        )
+
+        # Record in session history
+        summary = res.response_text
         if len(summary) > 120:
             summary = summary[:117] + "..."
-        _add_to_history(session_history, stripped, tool.name, summary)
+        _add_to_history(session_history, stripped, res.tool_name, summary)
 
 
 def _sanitize_for_console(text: str) -> str:

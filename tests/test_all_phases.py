@@ -567,7 +567,7 @@ class TestIntentParsingAndRegression:
 
     def test_all_10_tools_discovered(self, registry):
         tools = registry.get_all_tools()
-        assert len(tools) == 36
+        assert len(tools) == 38
         expected_names = {
             "open_application",
             "get_system_info",
@@ -605,6 +605,9 @@ class TestIntentParsingAndRegression:
             "read_screen",
             "describe_screen",
             "find_on_screen",
+            # Phase 10
+            "run_task",
+            "task_status",
         }
         actual_names = set(registry.get_tool_names())
         assert actual_names == expected_names

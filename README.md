@@ -25,7 +25,8 @@ Currently under active development.
 Development follows the phases defined in:
 
 - `PRODUCT_VISION.md` — Complete vision and requirements
-- `DEVELOPMENT_PLAN.md` — Development roadmap
+- `DEVELOPMENT_PLAN.md` — V1 Foundation roadmap (Phases 0 - 10 completed)
+- `DEVELOPMENT_PLAN_V2.md` — V2 Personal Assistant roadmap (Jarvis-style daily work assistant)
 - `CLAUDE.md` — Development instructions for Claude Code
 - `CHANGELOG.md` — Development history
 

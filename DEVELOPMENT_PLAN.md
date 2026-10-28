@@ -411,33 +411,54 @@ Architecture:
 
 User goal
 ↓
-Planner
+Planner (task_planner.py)
 ↓
-Task graph
+Task graph (Plan + TaskStep list)
 ↓
-Tool execution
+Tool execution (task_runner.py)
 ↓
-Observation
+Observation (result_key → context)
 ↓
-Verification
+Verification (VERIFY step type)
 ↓
-Next step
+Next step / BRANCH
 ↓
-Recovery
+Retry + Fallback Recovery
 ↓
-Completion
+Progress reporting (callback)
+↓
+Completion (RunReport)
 
 Capabilities:
 
-- Multi-step planning
-- Sequential actions
-- Conditional branches
-- Loops
-- Retry
-- Error recovery
-- Progress reporting
-- Pause/resume
-- Cancellation
+- Multi-step planning (9 goal templates + generic fallback)
+- Sequential actions (ordered TaskStep list)
+- Conditional branches (BRANCH step type)
+- Loops (LOOP step type with inner steps)
+- Retry (configurable max_retries per step)
+- Error recovery (fallback tool + continue-on-failure)
+- Progress reporting (progress_callback → console / queue)
+- Pause/resume (threading.Event)
+- Cancellation (threading.Event, graceful mid-wait cancel)
+- Background tasks (TaskManager.submit → daemon thread)
+- Task lifecycle management (status / report / drain_progress / cleanup)
+
+New files:
+
+- src/task_planner.py  — goal → Plan + TaskStep list (9 templates)
+- src/task_runner.py   — executes plans; retry, verify, branch, loop, wait
+- src/task_manager.py  — singleton; background threads, pause/cancel/status
+- src/tools/run_task.py    — tool plugin (CONFIRM): multi-step autonomous task
+- src/tools/task_status.py — tool plugin (SAFE): task lifecycle management
+
+New tools (38 total):
+
+- run_task    — Execute a multi-step goal autonomously
+- task_status — Check, cancel, pause, or resume background tasks
+
+Tests:
+
+- tests/test_phase10_tasks.py — 78 tests; all passing
 
 Example:
 
@@ -445,12 +466,16 @@ Example:
 
 SPIDY:
 
-1. Locate project
-2. Check Git status
-3. Run tests
-4. Start server
-5. Check output
-6. Report results
+1. List project structure
+2. Find test files
+3. Describe current screen
+4. Search for TODO items
+5. Take screenshot
+6. Get system info
+7. Verify all steps complete
+
+Status:
+COMPLETE
 
 
 ---

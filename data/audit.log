@@ -944,3 +944,21 @@ Call log:
 Call log:
   - waiting for locator("Dasboard button") to be visible
 
+[2026-10-25T17:13:29] CMD: 'open close' | TOOL: window_management | PERMISSION: CANCELLED -> RESULT: cancelled by user
+[2026-10-25T17:16:03] CMD: 'open notepad' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Notepad is now open.
+[2026-10-25T17:16:03] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:04] CMD: 'launch calculator' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Calculator is now open.
+[2026-10-25T17:16:04] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:04] CMD: 'start vs code' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: error: 'vs_code' is not in the allowed application list.
+Allowed: Calculator, Discord, File Explorer, Google Chrome, Microsoft Edge, Notepad, Spotify, Steam, Terminal, VS Code, WhatsApp
+[2026-10-25T17:16:04] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:04] CMD: 'run file explorer' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: File Explorer is now open.
+[2026-10-25T17:16:04] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:05] CMD: 'open terminal' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Terminal is now open.
+[2026-10-25T17:16:05] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:06] CMD: 'open powershell' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Terminal is now open.
+[2026-10-25T17:16:06] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:07] CMD: 'unknown command' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:07] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent
+[2026-10-25T17:16:08] CMD: 'open chrome' | TOOL: open_application | PERMISSION: GRANTED -> RESULT: Google Chrome is now open.
+[2026-10-25T17:16:08] CMD: 'y' | PERMISSION: DENIED -> RESULT: error: unknown intent

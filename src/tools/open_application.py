@@ -191,8 +191,13 @@ class OpenApplicationTool(Tool):
                 message="No application specified. Try: open notepad, open chrome, open vs code, etc."
             )
 
-        # Normalise to canonical key
-        canonical = ALIAS_MAP.get(raw_lower)
+        # Normalise to canonical key (handling spaces, underscores, and hyphens)
+        canonical = (
+            ALIAS_MAP.get(raw_lower)
+            or ALIAS_MAP.get(raw_lower.replace("_", " "))
+            or ALIAS_MAP.get(raw_lower.replace("-", " "))
+            or ALIAS_MAP.get(raw_lower.replace(" ", "_"))
+        )
         if canonical is None:
             return ToolResult(
                 success=False,

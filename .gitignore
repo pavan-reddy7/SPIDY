@@ -16,3 +16,6 @@ data/rag_chunks/
 
 # Screen understanding (screenshots)
 data/screenshots/
+
+# Voice engine audio cache
+data/audio_cache/

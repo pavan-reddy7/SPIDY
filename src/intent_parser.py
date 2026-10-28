@@ -6,7 +6,11 @@ Parses natural-language user input and matches it to a registered tool,
 extracting any parameters from the text.
 
 Key design:
-- All matching is case-insensitive.
+- All matching is case-insensitive (small, CAPITAL, Title Case).
+- Supports commands with underscores (speech_to_text, open_browser),
+  with spaces (speech to text, open browser), or hyphens.
+- Automatically incorporates canonical tool names, space/underscore variants,
+  and stripped 'get_' names so every command works seamlessly.
 - Longer keyword matches are preferred (more specific wins).
 - Matched keyword is always passed as params['_keyword'] so tools know
   which phrase triggered them.
@@ -14,6 +18,7 @@ Key design:
   because open_folder registers those keywords with longer match lengths.
 """
 
+import re
 from tool_base import Tool, ToolRegistry
 
 
@@ -23,10 +28,6 @@ def _replace_smart_quotes(s: str) -> str:
 
 
 # Verbs that can precede a tool keyword
-# NOTE: do NOT add close/minimize/maximize here — they are window action
-# keywords in their own right, not generic verb prefixes. If they were
-# ACTION_VERBS they would match app names via verb+keyword and steal
-# routing from window_management.
 ACTION_VERBS = [
     "open", "launch", "start", "run",
     "show", "get", "list",
@@ -35,79 +36,123 @@ ACTION_VERBS = [
 ]
 
 
+def _normalize_tokens(s: str) -> list[str]:
+    """Extract individual words/tokens, splitting on whitespace, underscores, hyphens."""
+    return [part for part in re.split(r'[\s_\-]+', s) if part]
+
+
+def _get_registry_index(registry: ToolRegistry) -> dict:
+    """Build or retrieve cached intent matching index for the tool registry."""
+    tools = registry.get_all_tools()
+    cached = getattr(registry, "_intent_index", None)
+    if cached is not None and cached.get("tool_count") == len(tools):
+        return cached
+
+    direct_map: dict[tuple[str, ...], list[tuple[Tool, str, int]]] = {}
+    for tool in tools:
+        phrases: set[str] = set()
+        for kw in tool.keywords:
+            kw_clean = kw.strip()
+            if kw_clean:
+                phrases.add(kw_clean)
+                phrases.add(kw_clean.replace('_', ' '))
+                phrases.add(kw_clean.replace(' ', '_'))
+
+        name = tool.name
+        phrases.add(name)
+        phrases.add(name.replace('_', ' '))
+        phrases.add(name.replace(' ', '_'))
+
+        if name.startswith('get_'):
+            stripped = name[4:]
+            phrases.add(stripped)
+            phrases.add(stripped.replace('_', ' '))
+            phrases.add(stripped.replace(' ', '_'))
+
+        for p in phrases:
+            toks = tuple(t.lower() for t in _normalize_tokens(p))
+            if not toks:
+                continue
+            if toks not in direct_map:
+                direct_map[toks] = []
+            direct_map[toks].append((tool, p, len(p)))
+
+    for toks in direct_map:
+        direct_map[toks].sort(key=lambda item: item[2], reverse=True)
+
+    verb_tokens = [tuple(t.lower() for t in _normalize_tokens(v)) for v in ACTION_VERBS]
+    verb_tokens.sort(key=lambda v: len(v), reverse=True)
+
+    index = {
+        "tool_count": len(tools),
+        "direct_map": direct_map,
+        "verb_tokens": verb_tokens,
+    }
+    registry._intent_index = index
+    return index
+
+
 def parse_intent(text: str, registry: ToolRegistry) -> tuple[Tool, dict] | None:
     """
     Match user text to a registered tool.
-
+    Accepts uppercase, lowercase, mixed case, underscores, spaces, or hyphens.
     Returns (Tool, params_dict) or None if no match.
     """
-    # Normalise — collapse smart-quotes and extra whitespace
     orig = text.strip()
     orig_no_smart = _replace_smart_quotes(orig)
-    cleaned = orig_no_smart.lower()
-    if not cleaned:
+    if not orig_no_smart:
         return None
 
-    best_match: tuple[Tool, dict, int] | None = None  # (tool, params, keyword_length)
+    # Find token spans in orig_no_smart
+    matches = list(re.finditer(r'[^\s_:\-]+', orig_no_smart))
+    if not matches:
+        return None
 
-    for tool in registry.get_all_tools():
-        for keyword in tool.keywords:
-            kw = keyword.lower()
-            match_result = _try_match(cleaned, kw, tool, orig_no_smart)
-            if match_result is not None:
-                tool_obj, params, kw_len = match_result
-                # Prefer longer keyword matches (more specific wins)
-                if best_match is None or kw_len > best_match[2]:
-                    best_match = (tool_obj, params, kw_len)
+    tokens = [m.group(0).lower() for m in matches]
+    total_tokens = len(tokens)
+
+    index = _get_registry_index(registry)
+    direct_map = index["direct_map"]
+    verb_tokens = index["verb_tokens"]
+
+    best_match: tuple[Tool, dict, tuple[int, int]] | None = None  # (tool, params, score)
+
+    # 1. Direct match (e.g. "speech_to_text", "speech to text", "open_browser")
+    for n in range(total_tokens, 0, -1):
+        sub_toks = tuple(tokens[:n])
+        if sub_toks in direct_map:
+            tool, orig_kw, _ = direct_map[sub_toks][0]
+            end_pos = matches[n - 1].end()
+            rest = orig_no_smart[end_pos:].lstrip(' :_\t-')
+            params = _extract_params(rest)
+            params['_keyword'] = orig_kw
+            score = (n, end_pos)
+            if best_match is None or score > best_match[2]:
+                best_match = (tool, params, score)
+            break
+
+    # 2. Verb + keyword match (e.g. "open notepad", "get system info", "launch chrome")
+    for vtoks in verb_tokens:
+        vlen = len(vtoks)
+        if total_tokens > vlen and tuple(tokens[:vlen]) == vtoks:
+            sub_input_toks = tokens[vlen:]
+            sub_matches = matches[vlen:]
+            sub_count = len(sub_input_toks)
+            for n in range(sub_count, 0, -1):
+                sub_toks = tuple(sub_input_toks[:n])
+                if sub_toks in direct_map:
+                    tool, orig_kw, _ = direct_map[sub_toks][0]
+                    end_pos = sub_matches[n - 1].end()
+                    rest = orig_no_smart[end_pos:].lstrip(' :_\t-')
+                    params = _extract_params(rest)
+                    params['_keyword'] = orig_kw
+                    score = (vlen + n, end_pos)
+                    if best_match is None or score > best_match[2]:
+                        best_match = (tool, params, score)
+                    break
 
     if best_match:
         return (best_match[0], best_match[1])
-    return None
-
-
-def _try_match(cleaned: str, keyword: str, tool: Tool, orig_no_smart: str) -> tuple[Tool, dict, int] | None:
-    """
-    Try to match cleaned input text against a keyword for a tool.
-    Returns (tool, params, keyword_length) or None.
-    """
-    # Direct exact match: "system info"
-    if cleaned == keyword:
-        # Extract from orig_no_smart to preserve case
-        remainder = orig_no_smart[:len(keyword)].strip()
-        params = {"_keyword": keyword}
-        return (tool, params, len(keyword))
-
-    # Verb + keyword: "get system info", "show system info"
-    for verb in ACTION_VERBS:
-        phrase = f"{verb} {keyword}"
-
-        if cleaned == phrase:
-            # Extract from orig_no_smart
-            remainder = orig_no_smart[len(phrase):].strip()
-            params = {"_keyword": keyword}
-            return (tool, params, len(keyword))
-
-        # Verb + keyword + trailing parameter: "list files in C:\Users"
-        if cleaned.startswith(phrase + " "):
-            remainder = orig_no_smart[len(phrase):].strip()
-            params = _extract_params(remainder)
-            params["_keyword"] = keyword
-            return (tool, params, len(keyword))
-
-    # Keyword + trailing parameter: "open folder C:\SPIDY"
-    if cleaned.startswith(keyword + " "):
-        remainder = orig_no_smart[len(keyword):].strip()
-        params = _extract_params(remainder)
-        params["_keyword"] = keyword
-        return (tool, params, len(keyword))
-
-    # Keyword + colon + trailing parameter: "remember this: my name is Pavan"
-    if cleaned.startswith(keyword + ":"):
-        remainder = orig_no_smart[len(keyword) + 1:].strip()
-        params = _extract_params(remainder)
-        params["_keyword"] = keyword
-        return (tool, params, len(keyword))
-
     return None
 
 
@@ -120,7 +165,6 @@ def _extract_params(remainder: str) -> dict:
     if not remainder:
         return params
 
-    # Strip common filler words from the front
     filler = {"in", "at", "of", "the", "my", "from", "to", "on", "folder", "directory"}
     words = remainder.split()
     while words and words[0].lower() in filler:
